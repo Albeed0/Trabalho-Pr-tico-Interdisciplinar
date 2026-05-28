@@ -1,0 +1,14 @@
+/home/arthyzxs/Trabalho Prático Interdisciplinar/bin/Debug/net9.0/Trabalho Prático Interdisciplinar
+/home/arthyzxs/Trabalho Prático Interdisciplinar/bin/Debug/net9.0/Trabalho Prático Interdisciplinar.deps.json
+/home/arthyzxs/Trabalho Prático Interdisciplinar/bin/Debug/net9.0/Trabalho Prático Interdisciplinar.runtimeconfig.json
+/home/arthyzxs/Trabalho Prático Interdisciplinar/bin/Debug/net9.0/Trabalho Prático Interdisciplinar.dll
+/home/arthyzxs/Trabalho Prático Interdisciplinar/bin/Debug/net9.0/Trabalho Prático Interdisciplinar.pdb
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.GeneratedMSBuildEditorConfig.editorconfig
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.AssemblyInfoInputs.cache
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.AssemblyInfo.cs
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.csproj.CoreCompileInputs.cache
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.dll
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/refint/Trabalho Prático Interdisciplinar.dll
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.pdb
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/Trabalho Prático Interdisciplinar.genruntimeconfig.cache
+/home/arthyzxs/Trabalho Prático Interdisciplinar/obj/Debug/net9.0/ref/Trabalho Prático Interdisciplinar.dll
