@@ -36,7 +36,9 @@ internal class Program
 
             switch(opcao)
             {
-                case 1: 
+                case 1:
+                long num = 0;
+                DecimalParaBinario(num);
                 break;
                 default:
                 break;
@@ -44,8 +46,28 @@ internal class Program
         }while(opcao != 0);
     }
 
+    static void DecimalParaBinario(long num)
+    {
+        Console.WriteLine("Informe um número decimal para ser convertido para binário: ");
+        num = long.Parse(Console.ReadLine());
 
+        long resto = 0;
+        long quociente = 0;
 
+        for (int i = 1; quociente > 0; i++)
+        {
+            Console.WriteLine($"Passo {i}: {num} / 2 -> Quociente: {DivisaoPorDois(quociente)}, Resto: {RestoPorDois(resto)}");
 
+        }
+    }
+
+    static long DivisaoPorDois(long value)
+    {
+        return value /= 2;
+    }
+    static long RestoPorDois(long value)
+    {
+        return value % 2;
+    }
 }
 
