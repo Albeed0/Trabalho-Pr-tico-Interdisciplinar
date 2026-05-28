@@ -30,12 +30,21 @@ internal class Program
             Console.WriteLine("|---------------------------------------------|");
             Console.WriteLine("| 0. Sair                                     |");
             Console.WriteLine("|---------------------------------------------|");
-            Console.Write($"|opção: {opcao = int.Parse(Console.ReadLine())}                                      |");
-            
+            Console.Write("|opção:                                       |");
+            opcao = int.Parse(Console.ReadLine()); 
             Console.WriteLine("|---------------------------------------------|");
 
+            switch(opcao)
+            {
+                case 1: 
+                break;
+                default:
+                break;
+            }
         }while(opcao != 0);
     }
+
+
 
 
 }
