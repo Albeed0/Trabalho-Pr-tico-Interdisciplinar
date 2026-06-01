@@ -48,18 +48,40 @@ internal class Program
 
     static void DecimalParaBinario(long num)
     {
+        long[] valorFinal = new long[1000000];
+
         Console.WriteLine("Informe um número decimal para ser convertido para binário: ");
         num = long.Parse(Console.ReadLine());
 
         long resto = 0;
         long quociente = 0;
 
-        for (int i = 1; quociente > 0; i++)
+        for (int i = 0; num > 0; i++)
         {
-            Console.WriteLine($"Passo {i}: {num} / 2 -> Quociente: {DivisaoPorDois(quociente)}, Resto: {RestoPorDois(resto)}");
+            quociente = DivisaoPorDois(num);
+            resto = RestoPorDois(num);
+            Console.WriteLine($"Passo {i + 1}: {num} / 2 -> Quociente: {quociente}, Resto: {resto}");
+            num = quociente;
+            
 
+            valorFinal[i] = resto;
+
+            if(num == 1)
+            {
+                Console.WriteLine($"Passo{i+1}: Junte os valores dos restos dos passos anteriores");
+
+            }
         }
+        Console.Write($"Resultado: ");
+        
+        for(int i = valorFinal.Length - 1; i >=0; i--)
+        {
+             Console.Write($"Resultado: {valorFinal[i]}");
+        }
+       
     }
+
+    
 
     static long DivisaoPorDois(long value)
     {
