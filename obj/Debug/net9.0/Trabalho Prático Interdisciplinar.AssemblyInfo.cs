@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trabalho Prático Interdisciplinar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+006caa1b33947f41489f49375f5e59c3149e0de6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c81cef8bdc3d025ba2f24eb632ebcc60ed80d796")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trabalho Prático Interdisciplinar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trabalho Prático Interdisciplinar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

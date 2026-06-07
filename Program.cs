@@ -12,6 +12,7 @@ internal class Program
 
         do
         {
+            Console.Clear();
             Console.WriteLine("|---------------------------------------------|");
             Console.WriteLine("| Menu de conversão de bases:                 |");
             Console.WriteLine("|---------------------------------------------|");
@@ -30,28 +31,68 @@ internal class Program
             Console.WriteLine("|---------------------------------------------|");
             Console.WriteLine("| 0. Sair                                     |");
             Console.WriteLine("|---------------------------------------------|");
-            Console.Write("|opção:                                       |");
+            Console.Write("|opção: ");
             opcao = int.Parse(Console.ReadLine()); 
             Console.WriteLine("|---------------------------------------------|");
 
             switch(opcao)
             {
                 case 1:
-                long num = 0;
-                DecimalParaBinario(num);
+                Console.Clear();
+                Console.WriteLine("Informe um número decimal para ser convertido para binário: ");
+                if(long.TryParse(Console.ReadLine(), out long num) && num >=0)
+                    {
+                        Console.WriteLine($"Resultado: {DecimalParaBinario(num)}");
+                    }
+
+                else
+                {
+                        Console.WriteLine("Valor inválido!");
+                }
+                break;
+
+                case 2:
+                Console.Clear();
+                BinarioParaDecimal();
+                
+                break;
+
+                case 3:
+                Console.Clear();
+                Console.WriteLine("Digite um número Decimal para ser convertido em octal: ");
+                if(long.TryParse(Console.ReadLine(), out num) && num >= 0)
+                    {
+                        DecimalParaOctal(num);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Valor inválido!");
+                    }
+                break;
+
+                case 4:
+                Console.Clear();
+                long numer = 0;
+                OctalParaDecimal(numer);
+                break;
+
+                case 5:
+                Console.Clear();
+                long numero = 0;
+                DecimalParaHexadecilma(numero);
                 break;
                 default:
                 break;
             }
+            Console.WriteLine("Pressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }while(opcao != 0);
     }
 
-    static void DecimalParaBinario(long num)
+    static long DecimalParaBinario(long num)
     {
+        int cont = -1;
         long[] valorFinal = new long[1000000];
-
-        Console.WriteLine("Informe um número decimal para ser convertido para binário: ");
-        num = long.Parse(Console.ReadLine());
 
         long resto = 0;
         long quociente = 0;
@@ -63,26 +104,207 @@ internal class Program
             Console.WriteLine($"Passo {i + 1}: {num} / 2 -> Quociente: {quociente}, Resto: {resto}");
             num = quociente;
             
-
             valorFinal[i] = resto;
+            cont++;
 
-            if(num == 1)
+            if(num == 0)
             {
-                Console.WriteLine($"Passo{i+1}: Junte os valores dos restos dos passos anteriores");
+                Console.WriteLine($"Passo{i+2}: Junte os valores dos restos dos passos anteriores");
 
             }
         }
         Console.Write($"Resultado: ");
         
-        for(int i = valorFinal.Length - 1; i >=0; i--)
+        string resultado = "";
+
+        for(int i = cont; i >= 0; i--)
         {
-             Console.Write($"Resultado: {valorFinal[i]}");
+             resultado += Convert.ToString(valorFinal[i]);
         }
+
+        return long.Parse(resultado);
        
     }
 
-    
+    static void BinarioParaDecimal(long num = 0)
+    {
+        Console.WriteLine("Digite um número binário para ser convertido em decimal: ");
+        num = long.Parse(Console.ReadLine());
+        string temp = Convert.ToString(num);
 
+        for(int i = 0; i < temp.Length; i++)
+        {
+            if(Convert.ToInt32(temp[i]) != 48 && Convert.ToInt32(temp[i]) != 49)
+            {
+                Console.WriteLine("Valor inválido! Por favor escreva apenas 0 e 1!");
+                break;
+            }
+        }
+
+        long resultadoDecimal = 0;
+        int pesoBase = 1;
+        int passo = 1;
+
+        Console.WriteLine($"O número em binário é: {temp}");
+
+        for(int j = temp.Length - 1; j >= 0; j--)
+        {
+            int digitoBinario = temp[j] - '0';
+
+            long termoMultiplicado = digitoBinario * pesoBase;
+            resultadoDecimal += termoMultiplicado;
+            Console.WriteLine($"Passo {passo}: ({digitoBinario} * 2^{passo - 1}) = {termoMultiplicado}");
+            
+            pesoBase *= 2;
+            passo++;
+        }
+
+        Console.Write($"Resultado: {resultadoDecimal}");
+        Console.WriteLine();
+    }
+
+    static long DecimalParaOctal(long num)
+    {
+        long[] resultadoOctal = new long[10000];
+        int cont = -1;
+
+        long quociente = 0;
+        long resto = 0;
+
+        for(int i = 0; num > 0; i++)
+        {
+            quociente = num / 8;
+            resto = num % 8;
+
+            Console.WriteLine($"Passo {i + 1}: {num} / 8 -> Quociente: {quociente}, Resto: {resto}");
+            num = quociente;
+            
+            resultadoOctal[i] = resto;
+            cont++;
+
+            if(num == 0)
+            {
+                Console.WriteLine($"Passo {i+2}: Junte os valores dos restos dos passos anteriores");
+
+            }
+
+        }
+
+        string resultado = "";
+
+        for(int a = cont; a >= 0; a--)
+        {
+            resultado += Convert.ToString(resultadoOctal[a]);
+        }
+        
+        Console.Write($"Resultado: ");
+
+        return long.Parse(resultado);
+    }
+
+    static long OctalParaDecimal(long num)
+    {
+        Console.WriteLine("Digite um número octal para ser convertido em decimal: ");
+        num = long.Parse(Console.ReadLine());
+        string temp = Convert.ToString(num);
+
+        for(int i = 0; i < temp.Length; i++)
+        {
+            if(Convert.ToInt32(temp[i]) < 0 || Convert.ToInt32(temp[i]) > 7)
+            {
+                Console.WriteLine("Valor inválido! Por favor escreva apenas valores entre 0 e 7!");
+                return -1;
+            }
+        }
+
+        long resultadoDecimal = 0;
+        int pesoBase = 1;
+        int passo = 1;
+
+        Console.WriteLine($"O número em binário é: {temp}");
+
+        for(int j = temp.Length - 1; j >= 0; j--)
+        {
+            int digitoOctal = temp[j] - '0';
+
+            long termoMultiplicado = digitoOctal * pesoBase;
+            resultadoDecimal += termoMultiplicado;
+            Console.WriteLine($"Passo {passo}: ({digitoOctal} * 8^{passo - 1}) = {termoMultiplicado}");
+            
+            pesoBase *= 8;
+            passo++;
+        }
+
+        Console.Write($"Resultado: ");
+
+        return resultadoDecimal;
+
+    }
+
+
+
+    static void DecimalParaHexadecilma(long num)
+    {
+        Console.WriteLine("Digite um número Decimal para ser convertido para Hexadecimal: ");
+        num = long.Parse(Console.ReadLine());
+
+        int cont = -1;
+        char[] valorHexadecimal = new char[1000000];
+
+        long resto = 0;
+        long quociente = 0;
+
+        for (int i = 0; num > 0; i++)
+        {
+            quociente = num / 16;
+            resto = num % 16;
+            Console.WriteLine($"Passo {i + 1}: {num} / 16 -> Quociente: {quociente}, Resto: {resto}");
+            num = quociente;
+            
+            if(resto == 10)
+            {
+                resto = 'A';
+            }
+            else if(resto == 11)
+            {
+                resto = 'B';
+            }
+            else if(resto == 12)
+            {
+                resto = 'C';
+            }
+            else if(resto == 13)
+            {
+                resto = 'D';
+            }
+            else if(resto == 14)
+            {
+                resto = 'E';
+            }
+            else if(resto == 15)
+            {
+                resto = 'F';
+            }
+            
+            valorHexadecimal[i] = Convert.ToChar(resto);
+            cont++;
+
+            if(num == 0)
+            {
+                Console.WriteLine($"Passo{i+2}: Junte os valores dos restos dos passos anteriores");
+
+            }
+        }
+        
+        string resultado = "";
+
+        for(int i = cont; i >= 0; i--)
+        {
+            resultado += Convert.ToString(valorHexadecimal[i]);
+        }
+
+        Console.Write($"Resultado: {resultado}");
+    }
     static long DivisaoPorDois(long value)
     {
         return value /= 2;
