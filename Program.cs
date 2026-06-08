@@ -53,7 +53,10 @@ internal class Program
 
                 case 2:
                 Console.Clear();
-                BinarioParaDecimal();
+                Console.WriteLine("Digite um número binário para ser convertido em decimal: ");
+
+                if(long.TryParse(Console.ReadLine(), out long nume))
+                BinarioParaDecimal(nume);
                 
                 break;
 
@@ -85,6 +88,11 @@ internal class Program
                 case 6:
                 string numero1 = "";
                 HexadecimalParaDecimal(numero1);
+                break;
+
+                case 7:
+                long ent = 0;
+                BinarioParaOctal(ent);
                 break;
                 default:
                 break;
@@ -131,10 +139,9 @@ internal class Program
        
     }
 
-    static void BinarioParaDecimal(long num = 0)
+    static long BinarioParaDecimal(long num)
     {
-        Console.WriteLine("Digite um número binário para ser convertido em decimal: ");
-        num = long.Parse(Console.ReadLine());
+        
         string temp = Convert.ToString(num);
 
         for(int i = 0; i < temp.Length; i++)
@@ -164,8 +171,7 @@ internal class Program
             passo++;
         }
 
-        Console.Write($"Resultado: {resultadoDecimal}");
-        Console.WriteLine();
+        return resultadoDecimal;
     }
 
     static long DecimalParaOctal(long num)
@@ -387,10 +393,10 @@ internal class Program
             }
         }
 
-        for(int i = 0; i< temp.Length / 3; i++)
-        {
-            
-        }
+        long binarioDecimal = BinarioParaDecimal(long.Parse(temp));
+        long decimalOctal =  DecimalParaOctal(binarioDecimal);
+
+        Console.WriteLine($"Resultado: {decimalOctal}");
     }
 
     static long DivisaoPorDois(long value)
