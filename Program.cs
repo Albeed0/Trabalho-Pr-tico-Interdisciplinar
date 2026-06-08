@@ -81,6 +81,11 @@ internal class Program
                 long numero = 0;
                 DecimalParaHexadecilma(numero);
                 break;
+
+                case 6:
+                long numero1 = 0;
+                HexadecimalParaDecimal(numero1);
+                break;
                 default:
                 break;
             }
@@ -210,7 +215,7 @@ internal class Program
 
         for(int i = 0; i < temp.Length; i++)
         {
-            if(Convert.ToInt32(temp[i]) < 0 || Convert.ToInt32(temp[i]) > 7)
+            if(temp[i] < '0' || temp[i] > '7')
             {
                 Console.WriteLine("Valor inválido! Por favor escreva apenas valores entre 0 e 7!");
                 return -1;
@@ -263,36 +268,38 @@ internal class Program
             
             if(resto == 10)
             {
-                resto = 'A';
+                valorHexadecimal[i] = 'A';
             }
             else if(resto == 11)
             {
-                resto = 'B';
+                valorHexadecimal[i] = 'B';
             }
             else if(resto == 12)
             {
-                resto = 'C';
+                valorHexadecimal[i] = 'C';
             }
             else if(resto == 13)
             {
-                resto = 'D';
+                valorHexadecimal[i] = 'D';
             }
             else if(resto == 14)
             {
-                resto = 'E';
+                valorHexadecimal[i] = 'E';
             }
             else if(resto == 15)
             {
-                resto = 'F';
+                valorHexadecimal[i] = 'F';
             }
-            
-            valorHexadecimal[i] = Convert.ToChar(resto);
-            cont++;
+            else
+            {
+                valorHexadecimal[i] = Convert.ToChar(resto + 48);
 
+            }
+
+            cont++;
             if(num == 0)
             {
                 Console.WriteLine($"Passo{i+2}: Junte os valores dos restos dos passos anteriores");
-
             }
         }
         
@@ -300,11 +307,62 @@ internal class Program
 
         for(int i = cont; i >= 0; i--)
         {
-            resultado += Convert.ToString(valorHexadecimal[i]);
+            resultado += Convert.ToChar(valorHexadecimal[i]);
         }
 
-        Console.Write($"Resultado: {resultado}");
+        
+        Console.Write($"Resultado: {resultado}\n");
     }
+
+    static long HexadecimalParaDecimal(long num)
+    {
+        string[] codigosDecimais = {};
+        Console.WriteLine("Digite um número hexadecimal para ser convertido em decimal: ");
+        num = long.Parse(Console.ReadLine());
+        string temp = Convert.ToString(num).ToUpper();
+
+        for(int i = 0; i < temp.Length; i++)
+        {
+            if(temp[i] < '0' || temp[i] > 'F')
+            {
+                Console.WriteLine("Valor inválido! Por favor escreva apenas valores entre 0 e 9 e letras entre A e F!");
+                return -1;
+            }
+        }
+
+        long resultadoDecimal = 0;
+        int pesoBase = 1;
+        int passo = 1;
+
+        Console.WriteLine($"O número em hecadecimal é: {temp}");
+
+        for(int j = temp.Length - 1; j >= 0; j--)
+        {
+            int digitoHexaDecimal = 0;
+
+            if(temp[j] >='0' && temp[j] <= '9')
+            {
+                digitoHexaDecimal = temp[j] - '0';
+            }
+            else if (temp[j] >= 'A' && temp[j] <= 'F')
+            {
+                digitoHexaDecimal = temp[j] - 'A' + 10;
+            }
+
+            long termoMultiplicado = digitoHexaDecimal * pesoBase;
+            resultadoDecimal += termoMultiplicado;
+            
+            Console.WriteLine($"Passo {passo}: ({digitoHexaDecimal} * 8^{passo - 1}) = {termoMultiplicado}");
+            
+            pesoBase *= 16;
+            passo++;
+        }
+
+        Console.Write($"Resultado: ");
+
+        return resultadoDecimal;
+    }
+
     static long DivisaoPorDois(long value)
     {
         return value /= 2;
