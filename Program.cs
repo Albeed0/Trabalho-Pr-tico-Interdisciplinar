@@ -83,7 +83,7 @@ internal class Program
                 break;
 
                 case 6:
-                long numero1 = 0;
+                string numero1 = "";
                 HexadecimalParaDecimal(numero1);
                 break;
                 default:
@@ -124,7 +124,7 @@ internal class Program
 
         for(int i = cont; i >= 0; i--)
         {
-             resultado += Convert.ToString(valorFinal[i]);
+            resultado += Convert.ToString(valorFinal[i]);
         }
 
         return long.Parse(resultado);
@@ -175,7 +175,8 @@ internal class Program
 
         long quociente = 0;
         long resto = 0;
-
+        
+        string mostrarPassos = "";
         for(int i = 0; num > 0; i++)
         {
             quociente = num / 8;
@@ -187,10 +188,10 @@ internal class Program
             resultadoOctal[i] = resto;
             cont++;
 
+            mostrarPassos = mostrarPassos + (i + 1);
             if(num == 0)
             {
-                Console.WriteLine($"Passo {i+2}: Junte os valores dos restos dos passos anteriores");
-
+                Console.WriteLine($"Passo {i+2}: Junte os valores dos restos dos passos: {mostrarPassos}");
             }
 
         }
@@ -226,7 +227,7 @@ internal class Program
         int pesoBase = 1;
         int passo = 1;
 
-        Console.WriteLine($"O número em binário é: {temp}");
+        Console.WriteLine($"O número em octal é: {temp}");
 
         for(int j = temp.Length - 1; j >= 0; j--)
         {
@@ -236,6 +237,11 @@ internal class Program
             resultadoDecimal += termoMultiplicado;
             Console.WriteLine($"Passo {passo}: ({digitoOctal} * 8^{passo - 1}) = {termoMultiplicado}");
             
+            if(num == 0)
+            {
+                Console.WriteLine($"Passo {j+2}: Junte todos os valores dos passos anteriores.");
+            }
+
             pesoBase *= 8;
             passo++;
         }
@@ -297,10 +303,12 @@ internal class Program
             }
 
             cont++;
+
             if(num == 0)
             {
                 Console.WriteLine($"Passo{i+2}: Junte os valores dos restos dos passos anteriores");
             }
+
         }
         
         string resultado = "";
@@ -314,16 +322,16 @@ internal class Program
         Console.Write($"Resultado: {resultado}\n");
     }
 
-    static long HexadecimalParaDecimal(long num)
+    static long HexadecimalParaDecimal(string num)
     {
         string[] codigosDecimais = {};
         Console.WriteLine("Digite um número hexadecimal para ser convertido em decimal: ");
-        num = long.Parse(Console.ReadLine());
-        string temp = Convert.ToString(num).ToUpper();
+        num = Console.ReadLine();
+        string temp = num.ToUpper();
 
         for(int i = 0; i < temp.Length; i++)
         {
-            if(temp[i] < '0' || temp[i] > 'F')
+            if(!(temp[i] < '0' && temp[i] > '9') && !(temp[i] < 'A' && temp[i] > 'F'))
             {
                 Console.WriteLine("Valor inválido! Por favor escreva apenas valores entre 0 e 9 e letras entre A e F!");
                 return -1;
@@ -351,7 +359,7 @@ internal class Program
 
             long termoMultiplicado = digitoHexaDecimal * pesoBase;
             resultadoDecimal += termoMultiplicado;
-            
+
             Console.WriteLine($"Passo {passo}: ({digitoHexaDecimal} * 8^{passo - 1}) = {termoMultiplicado}");
             
             pesoBase *= 16;
@@ -361,6 +369,28 @@ internal class Program
         Console.Write($"Resultado: ");
 
         return resultadoDecimal;
+    }
+
+    static void BinarioParaOctal(long num)
+    {
+        string[] codigosDecimais = {};
+        Console.WriteLine("Digite um número binário para ser convertido em octal: ");
+        num = long.Parse(Console.ReadLine());
+        string temp = Convert.ToString(num);
+        
+        for(int i = 0; i < temp.Length; i++)
+        {
+            if(Convert.ToInt32(temp[i]) != 48 && Convert.ToInt32(temp[i]) != 49)
+            {
+                Console.WriteLine("Valor inválido! Por favor escreva apenas 0 e 1!");
+                break;
+            }
+        }
+
+        for(int i = 0; i< temp.Length / 3; i++)
+        {
+            
+        }
     }
 
     static long DivisaoPorDois(long value)
